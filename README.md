@@ -1,4 +1,4 @@
-# ControleTarefas
+# Controle de Tarefas
 Crie suas tarefas e controle sua rotina com poucos cliques ...
 
 # Requisitos
