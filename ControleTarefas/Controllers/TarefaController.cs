@@ -16,6 +16,7 @@ namespace ControleTarefas.Controllers
         private readonly ITarefaRepository _tarefaRepository;
         private readonly ITarefaPrioridadeRepository _tarefaPrioridadeRepository;
         private readonly ITarefaStatusRepository _tarefaStatusRepository;
+
         private readonly IMapper _mapper;
 
         public TarefaController(
