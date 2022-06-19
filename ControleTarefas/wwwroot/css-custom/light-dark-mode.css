@@ -1,0 +1,16 @@
+﻿
+:root {
+    /*Light*/
+    --background-color-light: #fafbfe !important;
+    /*Dark*/
+    --background-color-dark: #343a40 !important;
+}
+
+.body-light {
+    background-color: var(--background-color-light) !important;
+}
+
+.body-dark {
+    background-color: var(--background-color-dark) !important;
+}
+

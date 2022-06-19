@@ -1,0 +1,254 @@
+﻿@model ControleTarefas.ViewModels.TarefaViewModel
+@using ControleTarefas.Extensions;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="~/css-custom/tarefas/index.css" asp-append-version="true" />
+
+<div class="row" style="margin-top: -18px;">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tarefas</a></li>
+                    <li class="breadcrumb-item active">Painel de Tarefas</li>
+                </ol>
+            </div>
+            <h4 class="page-title">
+                Painel de Tarefas
+                <a href="#" class="btn btn-primary btn-sm ms-3" onclick="OpenModalCriarEditarTarefa(null)">Nova Tarefa</a>
+            </h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="board">
+
+            <div class="tasks">
+                <h5 class="mt-0 task-header">BACKLOG (@Model.TarefasBacklog.Count())</h5>
+
+                <div id="task-list-one" class="task-list-items">
+                    @foreach (var item in Model.TarefasBacklog)
+                    {
+                        <div class="card mb-0">
+                            <div class="card-body p-3">
+
+                                <small class="float-end text-muted">@HelpersExtensions.MostrarData(item.DataInsercao)</small>
+
+                                <span class="badge text-light
+                                    @(item.TarefaPrioridade.Descricao == "Baixa" ? "bg-success" :
+                                      item.TarefaPrioridade.Descricao == "Media" ? "bg-secondary" :
+                                      item.TarefaPrioridade.Descricao == "Alta" ? "bg-danger" : "bg-danger")"> @item.TarefaPrioridade.Descricao </span>
+
+                                <h5 class="mt-2 mb-2">
+                                    <p href="#" class="text-body">@item.Titulo</p>
+                                </h5>
+
+                                <hr />
+
+                                <p class="mb-0 float-start">
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                        <i class="bi bi-eye cp" data-bs-toggle="tooltip" data-bs-placement="right" title="Ver Descrição" onclick="ObterDescricao(@item.CodTarefa)"></i>
+                                        <i class="bi bi-pencil-square cp" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editar" onclick="OpenModalCriarEditarTarefa(@item.CodTarefa)"></i>
+                                        <i class="bi bi-trash cp" data-bs-toggle="tooltip" data-bs-placement="right" title="Deletar" onclick="Deletar(@item.CodTarefa)"></i>
+                                    </span>
+                                </p>
+
+                                <div class="dropdown float-end cp">
+                                    <a href="#" class="dropdown text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-arrow-left-right cp" data-bs-toggle="tooltip" data-bs-placement="left" title="Mudar Status"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" style="">
+                                        <a href="javascript:void(0);" class="dropdown-item" onclick="MudarStatus(@item.CodTarefa, 'ToDo')"><i class="mdi mdi-pencil me-1"></i>To Do</a>
+                                        <a href="javascript:void(0);" class="dropdown-item" onclick="MudarStatus(@item.CodTarefa, 'InProgress')"><i class="mdi mdi-exit-to-app me-1"></i>In Progress</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="tasks">
+                <h5 class="mt-0 task-header">TO DO (@Model.TarefasToDo.Count())</h5>
+
+                <div id="task-list-one" class="task-list-items">
+                    @foreach (var item in Model.TarefasToDo)
+                    {
+                        <div class="card mb-0">
+                            <div class="card-body p-3">
+
+                                <small class="float-end text-muted">@HelpersExtensions.MostrarData(item.DataInsercao)</small>
+
+                                <span class="badge text-light
+                                    @(item.TarefaPrioridade.Descricao == "Baixa" ? "bg-success" :
+                                      item.TarefaPrioridade.Descricao == "Media" ? "bg-secondary" :
+                                      item.TarefaPrioridade.Descricao == "Alta" ? "bg-danger" : "bg-danger")"> @item.TarefaPrioridade.Descricao </span>
+
+                                <h5 class="mt-2 mb-2">
+                                    <p href="#" class="text-body">@item.Titulo</p>
+                                </h5>
+
+                                <hr />
+
+                                <p class="mb-0 float-start">
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                        <i class="bi bi-eye cp" data-bs-toggle="tooltip" data-bs-placement="right" title="Ver Descrição" onclick="ObterDescricao(@item.CodTarefa)"></i>
+                                        <i class="bi bi-pencil-square cp" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editar"></i>
+                                        <i class="bi bi-trash cp" data-bs-toggle="tooltip" data-bs-placement="right" title="Deletar" onclick="Deletar(@item.CodTarefa)"></i>
+                                    </span>
+                                </p>
+
+                                <p class="mb-0 float-end">
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                    </span>
+                                </p>
+
+                                <div class="dropdown float-end cp">
+                                    <a href="#" class="dropdown text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-arrow-left-right cp" data-bs-toggle="tooltip" data-bs-placement="left" title="Mudar Status"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" style="">
+                                        <a href="javascript:void(0);" class="dropdown-item" onclick="MudarStatus(@item.CodTarefa, 'Backlog')"><i class="mdi mdi-pencil me-1"></i>Backlog</a>
+                                        <a href="javascript:void(0);" class="dropdown-item" onclick="MudarStatus(@item.CodTarefa, 'InProgress')"><i class="mdi mdi-exit-to-app me-1"></i>In Progress</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="tasks">
+                <h5 class="mt-0 task-header">IN PROGRESS (@Model.TarefasInProgress.Count())</h5>
+
+                <div id="task-list-one" class="task-list-items">
+                    @foreach (var item in Model.TarefasInProgress)
+                    {
+                        <div class="card mb-0">
+                            <div class="card-body p-3">
+
+                                <small class="float-end text-muted">@HelpersExtensions.MostrarData(item.DataInsercao)</small>
+
+                                <span class="badge text-light
+                                    @(item.TarefaPrioridade.Descricao == "Baixa" ? "bg-success" :
+                                      item.TarefaPrioridade.Descricao == "Media" ? "bg-secondary" :
+                                      item.TarefaPrioridade.Descricao == "Alta" ? "bg-danger" : "bg-danger")"> @item.TarefaPrioridade.Descricao </span>
+
+                                <h5 class="mt-2 mb-2">
+                                    <p href="#" class="text-body">@item.Titulo</p>
+                                </h5>
+
+                                <hr />
+
+                                <p class="mb-0 float-start">
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                        <i class="bi bi-eye cp" data-bs-toggle="tooltip" data-bs-placement="right" title="Ver Descrição" onclick="ObterDescricao(@item.CodTarefa)"></i>
+                                        <i class="bi bi-pencil-square cp" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editar"></i>
+                                        <i class="bi bi-trash cp" data-bs-toggle="tooltip" data-bs-placement="right" title="Deletar" onclick="Deletar(@item.CodTarefa)"></i>
+                                    </span>
+                                </p>
+
+                                <p class="mb-0 float-end">
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                    </span>
+                                </p>
+
+                                <div class="dropdown float-end cp">
+                                    <a href="#" class="dropdown text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-arrow-left-right cp" data-bs-toggle="tooltip" data-bs-placement="left" title="Mudar Status"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" style="">
+                                        <a href="javascript:void(0);" class="dropdown-item" onclick="MudarStatus(@item.CodTarefa, 'Backlog')"><i class="mdi mdi-pencil me-1"></i>Backlog</a>
+                                        <a href="javascript:void(0);" class="dropdown-item" onclick="MudarStatus(@item.CodTarefa, 'ToDo')"><i class="mdi mdi-pencil me-1"></i>To do</a>
+                                        <a href="javascript:void(0);" class="dropdown-item" onclick="MudarStatus(@item.CodTarefa, 'Done')"><i class="mdi mdi-exit-to-app me-1"></i>Done</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="tasks">
+                <h5 class="mt-0 task-header">DONE (@Model.TarefasDone.Count())</h5>
+
+                <div id="task-list-one" class="task-list-items">
+                    @foreach (var item in Model.TarefasDone)
+                    {
+                        <div class="card mb-0">
+                            <div class="card-body p-3">
+
+                                <small class="float-end text-muted">@HelpersExtensions.MostrarData(item.DataInsercao)</small>
+
+                                <span class="badge text-light
+                                    @(item.TarefaPrioridade.Descricao == "Baixa" ? "bg-success" :
+                                      item.TarefaPrioridade.Descricao == "Media" ? "bg-secondary" :
+                                      item.TarefaPrioridade.Descricao == "Alta" ? "bg-danger" : "bg-danger")"> @item.TarefaPrioridade.Descricao </span>
+
+                                <h5 class="mt-2 mb-2">
+                                    <p href="#" class="text-body">@item.Titulo</p>
+                                </h5>
+
+                                <hr />
+
+                                <p class="mb-0 float-start">
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                        <i class="bi bi-eye cp" data-bs-toggle="tooltip" data-bs-placement="right" title="Ver Descrição" onclick="ObterDescricao(@item.CodTarefa)"></i>
+                                        <i class="bi bi-trash cp" data-bs-toggle="tooltip" data-bs-placement="right" title="Deletar" onclick="Deletar(@item.CodTarefa)"></i>
+                                    </span>
+                                </p>
+
+                                <p class="mb-0 float-end">
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                    </span>
+                                </p>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="criar-editar-tarefa"></div>
+<div id="descricao-tarefa"></div>
+
+@section scripts{
+
+    <script src="~/js-custom/tarefas/Index.js" asp-append-version="true"></script>
+
+    <script>
+        var urlCriarEditarTarefa= "@Url.Action("CriarEditarTarefa")";
+        var urlObterDescricao = "@Url.Action("ObterDescricao")";
+        var urlDeletar = "@Url.Action("Deletar")";
+        var urlMudarStatus = "@Url.Action("MudarStatus")";
+        var urlEditar = "@Url.Action("Editar")";
+        var urlOpenModalCriarEditarTarefa= "@Url.Action("OpenModalCriarEditarTarefa")";
+
+        (function() {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+            //new bootstrap.Modal('#modalTarefa');
+        })();
+
+    </script>
+}

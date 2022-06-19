@@ -1,0 +1,45 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.card-icon {
+    font-size: 35px;
+}
+
+.card-custom {
+    border: none;
+    box-shadow: -8px 12px 18px 0 rgb(25 42 70 / 13%);
+}
+
+.card-titulo {
+    font-size: 22px;
+    box-shadow: 10px 5px 5px #adb5bd;
+    border: none;
+}
+
+.card-p {
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.cp {
+    cursor: pointer;
+}

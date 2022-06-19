@@ -1,0 +1,74 @@
+﻿
+:root {
+    --background-color: #fff !important;
+    --body-background: #fafbfe !important;
+    --color-light: #6c757d !important;
+    --bg-task: #dee2e6;
+}
+
+body {
+    background-color: var(--body-background) !important;
+    color: var(--color-light) !important;
+}
+
+.card {
+   background-color: var(--background-color) !important;
+}
+
+.card-titulo {
+    color: var(--color-light) !important;
+}
+
+.card-body {
+    color: var(--color-light) !important;
+}
+
+.link-dark {
+    color: var(--color-light) !important;
+}
+
+.icon-color {
+    color: var(--color-light) !important;
+}
+
+body .text-body {
+    color: var(--color-light) !important;
+}
+
+.button-color {
+    background: #f1f3fa !important;
+    color: var(--color-light) !important;
+}
+
+.modal-content {
+    background-color: var(--background-color) !important;
+}
+
+body .task-modal-content .form-control-light {
+    background-color: #f8f9fa !important;
+    border-color: #f8f9fa !important;
+}
+
+body .btn-light {
+    border-color: var(--background-color) !important;
+    color: var(--color-light) !important;
+}
+
+.tasks {
+    background-color: #dee2e617 !important;
+}
+
+.form-control {
+    color: black !important;
+}
+
+.form-select {
+    color: black !important;
+}
+
+
+
+
+
+
+

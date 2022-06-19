@@ -1,0 +1,59 @@
+﻿@model ControleTarefas.ViewModels.TarefaViewModel
+@using ControleTarefas.Extensions;
+
+@{
+    Layout = null;
+}
+
+@if (Model.CodTarefa != null)
+{
+    <div class="modal fade task-modal-content show" id="modalDescricao" tabindex="-1" aria-labelledby="TaskDetailModalLabel" aria-modal="true" role="dialog" style="display: none;">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h4 class="modal-title" id="TaskDetailModalLabel">
+                        @Model.Titulo
+                        <span class="badge ms-2 text-light
+                                    @(Model.TarefaPrioridade.Descricao == "Baixa" ? "bg-success" :
+                                      Model.TarefaPrioridade.Descricao == "Media" ? "bg-secondary" :
+                                      Model.TarefaPrioridade.Descricao == "Alta" ? "bg-danger" : "bg-danger")">
+                            @Model.TarefaPrioridade.Descricao
+                        </span>
+                    </h4>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="p-2">
+                        <h5 class="mt-0">Descrição:</h5>
+
+                        <p class="text-muted mb-4">
+                            @Model.Descricao
+                        </p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-6">
+                                    <h5>Data Criação</h5>
+                                    <p>@HelpersExtensions.MostrarData(@Model.DataInsercao)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-6">
+                                    <h5>Data Finalizado</h5>
+                                    <p>@HelpersExtensions.MostrarData(@Model.DataInsercao)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

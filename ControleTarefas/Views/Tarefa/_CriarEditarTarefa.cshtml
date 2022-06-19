@@ -1,0 +1,62 @@
+﻿@model ControleTarefas.ViewModels.TarefaViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="modal fade task-modal-content show" id="modalTarefa" tabindex="-1"
+     aria-labelledby="NewTaskModalLabel" style="display: none;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="NewTaskModalLabel">Criar nova tarefa</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="retornoViewDefault"></div>
+
+                <form asp-action="" class="p-2" id="form">
+
+                    <input hidden value="@Model.CodTarefa" id="codTarefa" />
+                    <input hidden value="@Model.CodTarefaStatus" id="codTarefaStatus" />
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label asp-for="Titulo" for="task-title" class="form-label">Titulo</label>
+                                <input asp-for="Titulo" type="text" class="form-control form-control-light" id="txtTitulo"
+                                       placeholder="Digite ...">
+                                <span asp-validation-for="Titulo" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="CodTarefaPrioridade" class="form-label"></label>
+                                <select asp-for="CodTarefaPrioridade" class="form-select form-control-light" id="txtPrioridade" asp-items="@(new SelectList(Model.TarefaPrioridades, "CodTarefaPrioridade", "Descricao"))">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Descricao" for="task-description" class="form-label">Descrição</label>
+                        <textarea asp-for="Descricao" class="form-control form-control-light" id="txtDescricao" rows="3" placeholder="Digite ..."></textarea>
+                    </div>
+
+
+                    <div class="text-end">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                        <button type="button" class="btn btn-primary" onclick="CriarEditarTarefa()">Criar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

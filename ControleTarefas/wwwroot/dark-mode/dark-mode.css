@@ -1,0 +1,109 @@
+﻿
+
+
+:root {
+    --background-color: #343a40 !important;
+    --nav-color: #0F1028;
+    --primary-color: #EBC13C;
+    --secondary-color: #858FCF;
+    --foreground-color: #41464b;
+    --foreground-color-darken: #E5E5E5;
+    --text-color: black;
+    --text-muted: #d6d6d6;
+    --text-color-inverse: white;
+    --thead-color: #3B3E99;
+    --sidenav-user-color: #3B3E99;
+    --bc: #37404a !important;
+    --color-dark: #aab8c5 !important;
+}
+
+
+body {
+    background-color: var(--background-color);
+    color: var(--color-dark);
+}
+
+
+.card {
+    background-color: var(--bc) !important;
+    color: var(--color-dark);
+}
+
+.card-body {
+    color: var(--color-dark);
+}
+
+a {
+    color: var(--color-dark) !important;
+}
+
+.card-custom {
+    border: none;
+}
+
+.card-titulo {
+    font-size: 22px;
+    box-shadow: none;
+    border: none;
+}
+
+.icon-color {
+    color: var(--color-dark);
+}
+
+.link-dark {
+    color: var(--color-dark) !important;
+}
+
+body .tasks {
+    border: 1px solid #37404a;
+}
+
+    body .tasks .task-header {
+        background-color: #404954;
+    }
+
+body .text-body {
+    color: var(--color-dark) !important;
+}
+
+.button-color {
+    background: #404954 !important;
+}
+
+.modal-content {
+    background-color: #3b444e;
+}
+
+body .task-modal-content .form-control-light {
+    background-color: #3c4651 !important;
+    border-color: #3c4651 !important;
+}
+
+body .btn-light {
+    background-color: #464f5b;
+    border-color: #464f5b;
+    color: #f1f1f1;
+}
+
+.form-select {
+    color: #e3eaef !important;
+}
+
+.form-control {
+    color: #e3eaef !important;
+}
+
+.dropdown-menu {
+    background: #404954 !important;
+}
+
+.dropdown a:hover {
+    background: #37404a !important;
+}
+
+.swal2-container.swal2-center > .swal2-popup {
+    background: #404954;
+    color: #aab8c5;
+}
+
