@@ -7,8 +7,8 @@ Crie suas tarefas e controle sua rotina com poucos cliques ...
 - Processamento e armazenamentos de dados local ou algum manager de banco de dados (ex: sql server)
 
 # Como usar
-- Atualizar a base de dados para criar o banco de dados e as tabelas 
-- Como Atualizar ? Abrir o Package Manager Console e escrever o seguinte comando "update-database" 
+- Rodar comando para criar o banco de dados e as tabelas 
+- Como Rodar ? Abrir o Package Manager Console e escrever o seguinte comando "update-database" 
 - Atenção: Default Project tem que estar setado no "ControleTarefas.Data"
 
 # Tecnologias Implementadas
