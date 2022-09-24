@@ -14,17 +14,15 @@ function OpenModalCriarEditarTarefa(codTarefa) {
 
         })
         .fail(function (jqXHR, textStatus, msg) {
-            //alert(jqXHR)
         });
 }
 
 function CriarEditarTarefa() {
-    //$("#form").on('submit', function (e) {
 
-    //e.preventDefault();
-    //var dados = $(this).serialize();
+    debugger;
 
-    var dados = {
+    var dados =
+    {
         CodTarefa: $("#codTarefa").val(),
         Titulo: $("#txtTitulo").val(),
         Descricao: $("#txtDescricao").val(),
@@ -63,9 +61,7 @@ function CriarEditarTarefa() {
 
         })
         .fail(function (jqXHR, textStatus, msg) {
-            //alert(jqXHR)
         });
-    //});
 }
 
 function ObterDescricao(codTarefa) {
@@ -82,7 +78,6 @@ function ObterDescricao(codTarefa) {
 
         })
         .fail(function (jqXHR, textStatus, msg) {
-            //alert(jqXHR)
         });
 }
 
@@ -130,7 +125,6 @@ function Deletar(codTarefa) {
                     }
                 })
                 .fail(function (jqXHR, textStatus, msg) {
-                    //alert(jqXHR)
                 });
         }
     })
@@ -167,6 +161,5 @@ function MudarStatus(codTarefa, status) {
             }
         })
         .fail(function (jqXHR, textStatus, msg) {
-            //alert(jqXHR)
         });
 }
