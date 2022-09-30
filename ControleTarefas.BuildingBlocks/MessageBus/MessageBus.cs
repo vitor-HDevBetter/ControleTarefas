@@ -115,5 +115,6 @@ namespace ControleTarefas.BuildingBlocks.MessageBus
         {
             _channel.Dispose();
         }
+
     }
 }

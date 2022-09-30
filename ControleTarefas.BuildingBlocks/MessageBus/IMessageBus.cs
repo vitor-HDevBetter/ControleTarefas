@@ -14,7 +14,8 @@ namespace ControleTarefas.BuildingBlocks.MessageBus
         void VincularFila(string queue, string exchange, string routingKey);
         void PublicarFila(string exchange, string routingKey, byte[] body);
         void PublicarFila_Direct<T>(string queue, T message) where T : IntegrationEvent;
-        dynamic CosumirFila(string queue);
+        dynamic ConsumirFila(string queue);
+
 
 
     }
