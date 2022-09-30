@@ -32,7 +32,7 @@ namespace ControleTarefas.Business.Services
 
             await _tarefaRepository.Insert(tarefa);
 
-            _messageBus.PublicarFila_Direct("TarefaCriada", new TarefaCriadaIntegrationEvent(tarefa.CodTarefa));
+            _messageBus.PublicarFila_Direct("TarefaCriada", new TarefaCriadaIntegrationEvent(tarefa.CodTarefa, tarefa.Titulo));
         }
 
         public async Task Atualizar(Tarefa tarefa)

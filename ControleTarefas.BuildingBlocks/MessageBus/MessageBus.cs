@@ -65,17 +65,22 @@ namespace ControleTarefas.BuildingBlocks.MessageBus
             _channel.BasicPublish(exchange: exchange, routingKey: routingKey, basicProperties: null, body: body);
         }
 
-        public dynamic CosumirFila(string queue)
+        public dynamic ConsumirFila(string queue)
         {
             TryConnect();
+
+            _channel.BasicQos(0, prefetchCount: 5, false);
 
             _channel.QueueDeclare(queue: queue, durable: false, exclusive: false, autoDelete: false, arguments: null);
 
             var data = _channel.BasicGet(queue, true);
+
+            if (data == null) return null;
+
+            _channel.BasicAck(data.DeliveryTag, false);
+
             var message = Encoding.UTF8.GetString(data.Body.ToArray());
             _message = JsonSerializer.Deserialize<TarefaCriadaIntegrationEvent>(message);
-
-            _channel.BasicConsume(queue: queue, autoAck: false, consumer: _consumer);
 
             return _message ?? null;
         }
