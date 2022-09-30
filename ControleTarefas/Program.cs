@@ -19,6 +19,8 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation().AddNewtonsoftJson(
 
 builder.Services.ResolveDependencies();
 
+builder.Services.AddMessageBusConfiguration(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

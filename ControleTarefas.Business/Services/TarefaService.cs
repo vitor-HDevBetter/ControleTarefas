@@ -1,4 +1,6 @@
-﻿using ControleTarefas.Business.Intefaces.IRepositories;
+﻿using ControleTarefas.BuildingBlocks.MessageBus;
+using ControleTarefas.BuildingBlocks.Messages.Integration;
+using ControleTarefas.Business.Intefaces.IRepositories;
 using ControleTarefas.Business.Intefaces.IServices;
 using ControleTarefas.Business.Models;
 using ControleTarefas.Business.Models.Validations;
@@ -13,12 +15,15 @@ namespace ControleTarefas.Business.Services
     public class TarefaService : BaseService, ITarefaService
     {
         private readonly ITarefaRepository _tarefaRepository;
+        private readonly IMessageBus _messageBus;
 
         public TarefaService(ITarefaRepository tarefaRepository,
-                             INotificador notificador) : base(notificador)
+                             INotificador notificador,
+                             IMessageBus messageBus) : base(notificador)
 
         {
             _tarefaRepository = tarefaRepository;
+            _messageBus = messageBus;
         }
 
         public async Task Adicionar(Tarefa tarefa)
@@ -26,6 +31,8 @@ namespace ControleTarefas.Business.Services
             if (!ExecutarValidacao(new TarefaValidation(), tarefa)) return;
 
             await _tarefaRepository.Insert(tarefa);
+
+            _messageBus.PublicarFila_Direct("TarefaCriada", new TarefaCriadaIntegrationEvent(tarefa.CodTarefa));
         }
 
         public async Task Atualizar(Tarefa tarefa)
